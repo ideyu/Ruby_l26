@@ -1,9 +1,13 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sqlite3'
 
 configure do
   enable :sessions
+  @db = SQLite3::Database.new 'barbershop.db'
+  @db.execute 'CREATE TABLE IF NOT EXISTS 
+              "Users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "user_name" TEXT, "phone" TEXT, "date_stamp" TEXT, "barber" TEXT, "color" TEXT)'
 end
 
 helpers do
